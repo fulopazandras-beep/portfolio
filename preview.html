@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Project Explanation - Detailed breakdown of the 3.10 Hi-Fi Prototype by Fülöp András." />
+  <meta name="theme-color" content="#0e0e0f" />
+  <title>Project Explanation — Fülöp András</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0e0f; --surface: #161618; --surface2: #1e1e21;
+      --border: rgba(255,255,255,0.08); --accent: #a78bfa;
+      --accent2: #60e0c0; --text: #f0f0f2; --muted: #888890;
+    }
+    html { scroll-behavior: smooth; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; min-height: 100vh; overflow-x: hidden; font-size: 18px; -webkit-font-smoothing: antialiased; padding: 36px 28px; max-width: 980px; margin: 0 auto; }
+    a { text-decoration: none; color: inherit; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 36px; transition: opacity 0.2s; }
+    .back-link:hover { opacity: 0.75; }
+    h1 { font-size: 56px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.04em; max-width: 760px; }
+    h2 { font-size: 32px; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.02em; }
+    h3 { font-size: 22px; font-weight: 600; margin: 34px 0 12px; letter-spacing: -0.01em; }
+    p { font-size: 18px; font-weight: 400; color: var(--muted); line-height: 1.8; margin-bottom: 20px; max-width: 760px; }
+    .section { margin-bottom: 36px; }
+    .image-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 18px; }
+    .image-gallery figure { position: relative; display: grid; gap: 12px; max-width: 780px; width: 100%; margin: 0; padding: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden; cursor: pointer; transition: border-color 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s, background 0.3s; }
+    .image-gallery figure:hover { border-color: rgba(167,139,250,0.45); background: rgba(255,255,255,0.05); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(167,139,250,0.12); }
+    .image-gallery figure::before { content: ''; position: absolute; inset: -6px; border-radius: 18px; pointer-events: none; border: 1px solid rgba(167,139,250,0.25); opacity: 0.95; transition: opacity 0.2s; animation: pulseLine 5s ease-in-out infinite alternate; }
+    .image-gallery figure::after { content: ''; position: absolute; inset: -10px; border-radius: 20px; pointer-events: none; filter: blur(12px); background: rgba(167,139,250,0.10); opacity: 0.9; }
+    .image-gallery img { width: 100%; height: auto; border-radius: 12px; box-shadow: none; background: transparent; transition: transform 0.2s, box-shadow 0.2s; }
+    .image-gallery figure:hover img { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+    .image-gallery figcaption { font-size: 15px; color: var(--muted); line-height: 1.6; margin-top: 4px; }
+    @keyframes pulseLine { 0% { transform: scale(0.98); opacity: 0.75; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.98); opacity: 0.75; }
+    }
+  </style>
+</head>
+<body>
+  <a href="portfolio_updated_1.html" class="back-link">← Back to Portfolio</a>
+  <h1>Project Explanation</h1>
+  <div class="section">
+    <h2>Overview</h2>
+    <p>This page provides a detailed breakdown of the 3.10 Hi-Fi Prototype, explaining the design process, key features, and insights gained from the project.</p>
+  </div>
+  <div class="section">
+    <h2>Design Process</h2>
+    <p>The prototype was developed using Figma, focusing on a step-by-step design approach. Each fidelity stage helped refine the idea from rough sketches to polished interface details.</p>
+    <h3>Low Fidelity</h3>
+    <p>These early sketches capture the core flow and layout without distraction. The focus here is on structure, screen hierarchy, and key actions like dashboard overview, exercise selection, and expert chat.</p>
+    <div class="image-gallery">
+      <figure>
+        <img src="fidelity-low.png" alt="Low fidelity sketches of the app screens" loading="lazy">
+        <figcaption>Low-fidelity sketches showing the main screens and interaction flow.</figcaption>
+      </figure>
+    </div>
+    <h3>Mid Fidelity</h3>
+    <p>The mid-fidelity stage adds more detail, spacing, and navigation clarity. It helps validate the layout and the placement of UI elements before moving into visual styling.</p>
+    <div class="image-gallery">
+      <figure>
+        <img src="fidelity-mid.png" alt="Mid fidelity wireframes of the app" loading="lazy">
+        <figcaption>Mid-fidelity wireframes that define content structure and screen interactions.</figcaption>
+      </figure>
+    </div>
+    <h3>High Fidelity</h3>
+    <p>The high-fidelity version presents the final visual direction with polished components, imagery, and refined UI elements. This stage is useful for presenting the concept confidently and testing the final look.</p>
+    <div class="image-gallery">
+      <figure>
+        <img src="fidelity-high.png" alt="High fidelity polished app screens" loading="lazy">
+        <figcaption>High-fidelity mockups with polished UI, spacing, and visual details.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Key Features</h2>
+    <p>Highlights include intuitive navigation, responsive layouts, and accessibility considerations. The design emphasizes clarity and human-centered digital experiences.</p>
+  </div>
+  <div class="section">
+    <h2>Lessons Learned</h2>
+    <p>Through this project, I refined my skills in UI/UX design, prototyping, and user research, contributing to my growth as a product designer.</p>
+  </div>
+</body>
+</html>
