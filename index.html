@@ -205,6 +205,62 @@
     .tool-claude:hover { border-color: rgba(217,119,6,0.45); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(217,119,6,0.1); }
     .tool-capcut .tool-icon-wrap { background: transparent; border: none; }
     .tool-capcut:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+
+    /* ── HERO GRID ─────────────────────────────────── */
+    .hero-grid { display: grid; grid-template-columns: 1fr 210px; gap: 56px; align-items: center; margin-bottom: 48px; }
+    .hero-grid .hero-btns { margin-bottom: 0; }
+    @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 0; } .hero-visual { display: none; } }
+    .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+
+    /* ── PHONE MOCKUP (hero) ────────────────────────── */
+    @keyframes phone-float { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-18px) rotate(2deg); } }
+    .phone-wrap { animation: phone-float 6s ease-in-out infinite; position: relative; }
+    .phone-wrap::before { content:''; position:absolute; width:160px; height:160px; background:radial-gradient(circle,rgba(167,139,250,0.18) 0%,transparent 70%); border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); z-index:0; pointer-events:none; }
+    .phone-body { width:184px; height:386px; background:linear-gradient(165deg,#1d1d22 0%,#101014 100%); border:1.5px solid rgba(255,255,255,0.13); border-radius:44px; position:relative; box-shadow:0 40px 90px rgba(0,0,0,0.75),inset 0 1px 0 rgba(255,255,255,0.08),22px 22px 60px rgba(0,0,0,0.5); overflow:hidden; z-index:1; }
+    .pb-btn-r  { position:absolute; right:-2px; top:90px;  width:2.5px; height:32px; background:rgba(255,255,255,0.1); border-radius:2px; }
+    .pb-btn-l1 { position:absolute; left:-2px;  top:80px;  width:2.5px; height:24px; background:rgba(255,255,255,0.1); border-radius:2px; }
+    .pb-btn-l2 { position:absolute; left:-2px;  top:114px; width:2.5px; height:24px; background:rgba(255,255,255,0.1); border-radius:2px; }
+    .pb-screen { position:absolute; inset:8px; border-radius:36px; overflow:hidden; background:#0e0e10; }
+    .pb-island { position:absolute; top:10px; left:50%; transform:translateX(-50%); width:54px; height:10px; background:#000; border-radius:20px; z-index:10; }
+    .pb-home   { position:absolute; bottom:6px; left:50%; transform:translateX(-50%); width:52px; height:4px; background:rgba(255,255,255,0.25); border-radius:2px; z-index:10; }
+    .pb-ui { position:absolute; inset:0; padding:30px 10px 22px; display:flex; flex-direction:column; gap:7px; font-family:Inter,sans-serif; overflow:hidden; }
+    .pb-topbar { display:flex; justify-content:space-between; align-items:center; }
+    .pb-logo { font-size:9px; font-weight:700; color:#a78bfa; letter-spacing:0.06em; }
+    .pb-avatar { width:18px; height:18px; border-radius:50%; background:linear-gradient(135deg,#a78bfa,#60e0c0); }
+    .pb-greeting { font-size:7px; color:rgba(255,255,255,0.4); margin-top:4px; }
+    .pb-name { font-size:11px; font-weight:600; color:#f0f0f2; margin-top:1px; }
+    .pb-card { background:linear-gradient(135deg,rgba(167,139,250,0.14),rgba(96,224,192,0.06)); border:0.5px solid rgba(167,139,250,0.25); border-radius:12px; padding:9px 10px; }
+    .pb-card-label { font-size:6.5px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.38); margin-bottom:3px; }
+    .pb-stat { font-size:20px; font-weight:700; color:#f0f0f2; letter-spacing:-0.03em; }
+    .pb-stat-unit { font-size:7px; color:rgba(255,255,255,0.4); margin-left:2px; }
+    .pb-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
+    .pb-tile { background:rgba(255,255,255,0.04); border:0.5px solid rgba(255,255,255,0.07); border-radius:9px; padding:7px 8px; }
+    .pb-tile-val { font-size:9px; font-weight:600; color:#f0f0f2; margin-top:2px; }
+    .pb-tile-lbl { font-size:6px; color:rgba(255,255,255,0.32); margin-top:1px; }
+    .pb-nav { display:flex; justify-content:space-around; align-items:center; border-top:0.5px solid rgba(255,255,255,0.06); padding-top:7px; margin-top:auto; }
+    .pb-nav-dot { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.18); }
+    .pb-nav-dot.active { background:#a78bfa; width:16px; border-radius:2px; }
+
+    /* ── WORK CARD PHONE FAN ────────────────────────── */
+    .mock-phones { position:relative; width:100%; height:100%; display:flex; align-items:flex-end; justify-content:center; overflow:hidden; padding-bottom:10px; }
+    .mock-phone { width:74px; height:152px; background:linear-gradient(165deg,#1d1d22,#101014); border:1px solid rgba(255,255,255,0.13); border-radius:18px; position:relative; box-shadow:0 14px 36px rgba(0,0,0,0.75); overflow:hidden; flex-shrink:0; }
+    .mock-phone-island { position:absolute; top:5px; left:50%; transform:translateX(-50%); width:22px; height:4px; background:#000; border-radius:8px; z-index:5; }
+    .mock-phone-home { position:absolute; bottom:4px; left:50%; transform:translateX(-50%); width:22px; height:2.5px; background:rgba(255,255,255,0.22); border-radius:2px; z-index:5; }
+    .mp-l { transform:rotate(-10deg) translate(-6px,20px); z-index:1; opacity:0.65; }
+    .mp-c { transform:rotate(0deg); z-index:3; }
+    .mp-r { transform:rotate(10deg) translate(6px,20px); z-index:2; opacity:0.65; }
+
+    /* ── BROWSER MOCKUP ─────────────────────────────── */
+    .mock-browser { width:calc(100% - 28px); height:calc(100% - 20px); background:#161618; border:0.5px solid rgba(255,255,255,0.09); border-radius:10px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 16px 48px rgba(0,0,0,0.6); }
+    .mock-bar { background:#1a1a1d; padding:6px 10px; display:flex; align-items:center; gap:5px; border-bottom:0.5px solid rgba(255,255,255,0.06); flex-shrink:0; }
+    .mock-dot { width:6px; height:6px; border-radius:50%; }
+    .mock-url-bar { background:rgba(255,255,255,0.05); border-radius:4px; padding:2px 8px; font-size:7px; color:rgba(255,255,255,0.28); font-family:Inter,sans-serif; margin-left:6px; }
+    .mock-body { flex:1; padding:10px 12px; display:flex; flex-direction:column; gap:5px; overflow:hidden; }
+    .mock-h { height:8px; background:linear-gradient(90deg,rgba(167,139,250,0.75),rgba(167,139,250,0.15)); border-radius:4px; width:60%; }
+    .mock-ln { height:3.5px; background:rgba(255,255,255,0.07); border-radius:2px; }
+    .mock-imgs { display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; margin-top:3px; }
+    .mock-img-block { height:30px; border-radius:5px; background:linear-gradient(135deg,rgba(167,139,250,0.12),rgba(96,224,192,0.08)); border:0.5px solid rgba(255,255,255,0.06); }
+
   </style>
 </head>
 <body>
@@ -237,12 +293,66 @@
 
   <div class="container">
     <section id="home">
-      <div class="hero-tag"><span class="dot"></span> Available for junior product design roles</div>
-      <h1>Product Designer<br>crafting <span>clear, human</span><br>digital experiences.</h1>
-      <p class="hero-sub">I design intuitive digital products that put people first, from research and wireframes to polished, high-fidelity interfaces. I am currently seeking a junior product design role in Austria or remote.</p>
-      <div class="hero-btns">
-        <a href="#work" class="btn-primary">See featured projects</a>
-        <a href="#contact" class="btn-ghost">Discuss an opportunity</a>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-tag"><span class="dot"></span> Available for junior product design roles</div>
+          <h1>Product Designer<br>crafting <span>clear, human</span><br>digital experiences.</h1>
+          <p class="hero-sub">I design intuitive digital products that put people first, from research and wireframes to polished, high-fidelity interfaces. I am currently seeking a junior product design role in Austria or remote.</p>
+          <div class="hero-btns">
+            <a href="#work" class="btn-primary">See featured projects</a>
+            <a href="#contact" class="btn-ghost">Discuss an opportunity</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="phone-wrap">
+            <div class="phone-body">
+              <div class="pb-btn-r"></div><div class="pb-btn-l1"></div><div class="pb-btn-l2"></div>
+              <div class="pb-screen">
+                <div class="pb-island"></div>
+                <div class="pb-ui">
+                  <div class="pb-topbar">
+                    <span class="pb-logo">ReVita</span>
+                    <div class="pb-avatar"></div>
+                  </div>
+                  <div>
+                    <div class="pb-greeting">Good morning,</div>
+                    <div class="pb-name">András</div>
+                  </div>
+                  <div class="pb-card">
+                    <div class="pb-card-label">Heart Rate</div>
+                    <div><span class="pb-stat">72</span><span class="pb-stat-unit">bpm</span></div>
+                    <svg width="100%" height="22" viewBox="0 0 120 22" style="margin-top:5px"><polyline points="0,17 15,17 20,5 25,17 30,17 35,11 40,17 55,17 60,7 65,17 80,17 85,13 95,17 105,17 110,9 115,17 120,17" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.65"/></svg>
+                  </div>
+                  <div class="pb-grid">
+                    <div class="pb-tile">
+                      <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" fill="none" stroke="#60e0c0" stroke-width="1.5"/><line x1="6" y1="3" x2="6" y2="6" stroke="#60e0c0" stroke-width="1.5" stroke-linecap="round"/></svg>
+                      <div class="pb-tile-val">8.4k</div><div class="pb-tile-lbl">Steps</div>
+                    </div>
+                    <div class="pb-tile">
+                      <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 2C4.5 2 3 3.5 3 5.5C3 7.5 6 10 6 10C6 10 9 7.5 9 5.5C9 3.5 7.5 2 6 2Z" fill="rgba(96,224,192,0.2)" stroke="#60e0c0" stroke-width="1"/></svg>
+                      <div class="pb-tile-val">1.8L</div><div class="pb-tile-lbl">Water</div>
+                    </div>
+                    <div class="pb-tile">
+                      <svg width="12" height="12" viewBox="0 0 12 12"><path d="M4 10L6 6L7 8L9 3" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <div class="pb-tile-val">340</div><div class="pb-tile-lbl">kcal</div>
+                    </div>
+                    <div class="pb-tile">
+                      <svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="2" fill="none" stroke="#a78bfa" stroke-width="1"/><line x1="4" y1="5" x2="8" y2="5" stroke="#a78bfa" stroke-width="1"/><line x1="4" y1="7" x2="6" y2="7" stroke="#a78bfa" stroke-width="1"/></svg>
+                      <div class="pb-tile-val">7h 20</div><div class="pb-tile-lbl">Sleep</div>
+                    </div>
+                  </div>
+                  <div class="pb-nav">
+                    <div class="pb-nav-dot active"></div>
+                    <div class="pb-nav-dot"></div>
+                    <div class="pb-nav-dot"></div>
+                    <div class="pb-nav-dot"></div>
+                  </div>
+                </div>
+                <div class="pb-home"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="skills-row">
         <span class="skill-pill">Figma</span><span class="skill-pill">Figma Make</span><span class="skill-pill">UI Design</span><span class="skill-pill">UX Research</span><span class="skill-pill">Wireframing</span><span class="skill-pill">Prototyping</span><span class="skill-pill">Hi-Fi Design</span><span class="skill-pill">Usability Testing</span><span class="skill-pill">CapCut</span><span class="skill-pill">Competitive Analysis</span>
@@ -256,40 +366,11 @@
       <h2 class="section-title reveal">Featured Projects</h2>
       <div class="work-grid">
         <div class="work-card reveal-scale" onclick="window.open('https://www.figma.com/proto/BqIe0PZ3DMh3KwTl0E1JST/ReVita-%E2%80%94-Polished-App-Screens?node-id=44-3479&viewport=-3211%2C4809%2C0.45&t=taTdw5rtwzsPiFCa-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1','_blank')">
-          <div class="work-thumb thumb-1">
-            <svg viewBox="0 0 190 150" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-              <ellipse cx="55" cy="75" rx="45" ry="45" fill="rgba(167,139,250,0.12)"/><ellipse cx="145" cy="65" rx="32" ry="32" fill="rgba(96,224,192,0.09)"/>
-              <rect x="70" y="10" width="50" height="90" rx="9" fill="#1a1040" stroke="rgba(167,139,250,0.7)" stroke-width="1.2"/>
-              <rect x="84" y="15" width="22" height="4" rx="2" fill="rgba(167,139,250,0.4)"/><rect x="78" y="25" width="34" height="6" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="77" y="36" width="36" height="14" rx="4" fill="rgba(167,139,250,0.22)" stroke="rgba(167,139,250,0.5)" stroke-width="0.8"/><rect x="81" y="40" width="14" height="3" rx="1.5" fill="rgba(167,139,250,0.9)"/><rect x="81" y="45" width="9" height="2" rx="1" fill="rgba(167,139,250,0.4)"/>
-              <rect x="77" y="54" width="36" height="14" rx="4" fill="rgba(96,224,192,0.15)" stroke="rgba(96,224,192,0.5)" stroke-width="0.8"/><rect x="81" y="58" width="18" height="3" rx="1.5" fill="rgba(96,224,192,0.9)"/><rect x="81" y="63" width="11" height="2" rx="1" fill="rgba(96,224,192,0.4)"/>
-              <rect x="77" y="72" width="36" height="14" rx="4" fill="rgba(167,139,250,0.22)" stroke="rgba(167,139,250,0.5)" stroke-width="0.8"/><rect x="81" y="76" width="12" height="3" rx="1.5" fill="rgba(167,139,250,0.9)"/><rect x="81" y="81" width="16" height="2" rx="1" fill="rgba(167,139,250,0.4)"/>
-              <rect x="70" y="90" width="50" height="10" fill="#0f0a28"/>
-              <circle cx="87" cy="95" r="2.5" fill="#a78bfa"/><circle cx="95" cy="95" r="2.5" fill="rgba(255,255,255,0.2)"/><circle cx="103" cy="95" r="2.5" fill="rgba(255,255,255,0.2)"/>
-              <circle cx="36" cy="32" r="7" fill="none" stroke="rgba(167,139,250,0.5)" stroke-width="1"/><circle cx="158" cy="108" r="5" fill="none" stroke="rgba(96,224,192,0.5)" stroke-width="1"/>
-              <circle cx="152" cy="36" r="3.5" fill="rgba(167,139,250,0.6)"/><circle cx="30" cy="108" r="3" fill="rgba(96,224,192,0.5)"/>
-              <text x="95" y="138" text-anchor="middle" font-size="8.5" fill="rgba(167,139,250,0.9)" font-family="sans-serif" letter-spacing="1.5" font-weight="600">HI-FI PROTOTYPE</text>
-            </svg>
-            <span class="work-overlay-tag">Hi-Fi · Figma</span>
-          </div>
+          <div class="work-thumb thumb-1" style="background:linear-gradient(135deg,#1a1030,#2d1e5a);"><div class="mock-phones"><div class="mock-phone mp-l"><div class="mock-phone-island"></div><div style="position:absolute;inset:0;background:linear-gradient(160deg,#0f0820,#1e1248);padding:8px 6px;display:flex;flex-direction:column;gap:4px;overflow:hidden;"><div style="width:28px;height:3px;background:rgba(167,139,250,0.55);border-radius:2px;"></div><div style="width:20px;height:2px;background:rgba(255,255,255,0.15);border-radius:2px;"></div><div style="background:rgba(167,139,250,0.12);border:0.5px solid rgba(167,139,250,0.28);border-radius:5px;padding:4px;margin-top:3px;"><div style="width:16px;height:2px;background:rgba(167,139,250,0.7);border-radius:1px;margin-bottom:2px;"></div><div style="width:12px;height:2px;background:rgba(255,255,255,0.15);border-radius:1px;"></div></div><div style="background:rgba(96,224,192,0.08);border:0.5px solid rgba(96,224,192,0.25);border-radius:5px;padding:4px;"><div style="width:18px;height:2px;background:rgba(96,224,192,0.7);border-radius:1px;margin-bottom:2px;"></div><div style="width:13px;height:2px;background:rgba(255,255,255,0.15);border-radius:1px;"></div></div></div><div class="mock-phone-home"></div></div><div class="mock-phone mp-c"><div class="mock-phone-island"></div><div style="position:absolute;inset:0;background:linear-gradient(160deg,#0f0820,#1e1248);padding:8px 6px;display:flex;flex-direction:column;gap:4px;overflow:hidden;"><div style="width:28px;height:3px;background:rgba(167,139,250,0.55);border-radius:2px;"></div><div style="width:20px;height:2px;background:rgba(255,255,255,0.15);border-radius:2px;"></div><div style="background:rgba(167,139,250,0.12);border:0.5px solid rgba(167,139,250,0.28);border-radius:5px;padding:4px;margin-top:3px;"><div style="width:16px;height:2px;background:rgba(167,139,250,0.7);border-radius:1px;margin-bottom:2px;"></div><div style="width:12px;height:2px;background:rgba(255,255,255,0.15);border-radius:1px;"></div></div><div style="background:rgba(96,224,192,0.08);border:0.5px solid rgba(96,224,192,0.25);border-radius:5px;padding:4px;"><div style="width:18px;height:2px;background:rgba(96,224,192,0.7);border-radius:1px;margin-bottom:2px;"></div><div style="width:13px;height:2px;background:rgba(255,255,255,0.15);border-radius:1px;"></div></div></div><div class="mock-phone-home"></div></div><div class="mock-phone mp-r"><div class="mock-phone-island"></div><div style="position:absolute;inset:0;background:linear-gradient(160deg,#0f0820,#1e1248);padding:8px 6px;display:flex;flex-direction:column;gap:4px;overflow:hidden;"><div style="width:28px;height:3px;background:rgba(167,139,250,0.55);border-radius:2px;"></div><div style="width:20px;height:2px;background:rgba(255,255,255,0.15);border-radius:2px;"></div><div style="background:rgba(167,139,250,0.12);border:0.5px solid rgba(167,139,250,0.28);border-radius:5px;padding:4px;margin-top:3px;"><div style="width:16px;height:2px;background:rgba(167,139,250,0.7);border-radius:1px;margin-bottom:2px;"></div><div style="width:12px;height:2px;background:rgba(255,255,255,0.15);border-radius:1px;"></div></div><div style="background:rgba(96,224,192,0.08);border:0.5px solid rgba(96,224,192,0.25);border-radius:5px;padding:4px;"><div style="width:18px;height:2px;background:rgba(96,224,192,0.7);border-radius:1px;margin-bottom:2px;"></div><div style="width:13px;height:2px;background:rgba(255,255,255,0.15);border-radius:1px;"></div></div></div><div class="mock-phone-home"></div></div></div><span class="work-overlay-tag">Hi-Fi · Figma</span></div>
           <div class="work-info"><div class="work-name">Hi-Fi Prototype</div><div class="work-meta">Mobile Product Design · 2026 · Open Figma prototype ↗</div></div>
         </div>
         <div class="work-card reveal-scale" onclick="window.location.href='project-explanation.html'">
-          <div class="work-thumb thumb-1">
-            <svg viewBox="0 0 190 150" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-              <ellipse cx="55" cy="75" rx="45" ry="45" fill="rgba(167,139,250,0.12)"/><ellipse cx="145" cy="65" rx="32" ry="32" fill="rgba(96,224,192,0.09)"/>
-              <rect x="70" y="10" width="50" height="90" rx="9" fill="#1a1040" stroke="rgba(167,139,250,0.7)" stroke-width="1.2"/>
-              <rect x="78" y="20" width="34" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="78" y="30" width="28" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="78" y="40" width="36" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="78" y="50" width="32" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="78" y="60" width="30" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="78" y="70" width="26" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <rect x="78" y="80" width="34" height="4" rx="2" fill="rgba(167,139,250,0.5)"/>
-              <text x="95" y="138" text-anchor="middle" font-size="8.5" fill="rgba(167,139,250,0.9)" font-family="sans-serif" letter-spacing="1.5" font-weight="600">PROJECT EXPLANATION</text>
-            </svg>
-            <span class="work-overlay-tag">Explanation · Details</span>
-          </div>
+          <div class="work-thumb thumb-1"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1030,#2d1e5a);"><div class="mock-browser"><div class="mock-bar"><span class="mock-dot" style="background:#ff5f57"></span><span class="mock-dot" style="background:#febc2e"></span><span class="mock-dot" style="background:#28c840"></span><span class="mock-url-bar">project-explanation.html</span></div><div class="mock-body"><div class="mock-h"></div><div class="mock-ln" style="width:90%"></div><div class="mock-ln" style="width:75%"></div><div class="mock-ln" style="width:55%"></div><div class="mock-imgs"><div class="mock-img-block"></div><div class="mock-img-block"></div><div class="mock-img-block"></div></div><div class="mock-ln" style="width:85%;margin-top:4px"></div><div class="mock-ln" style="width:65%"></div><div class="mock-ln" style="width:80%"></div></div></div></div><span class="work-overlay-tag">Explanation · Details</span></div>
           <div class="work-info"><div class="work-name">Project Explanation</div><div class="work-meta">Detailed breakdown · 2026 · View details ↗</div></div>
         </div>
         <div class="work-card reveal-scale" style="opacity:0.5;pointer-events:none;">
