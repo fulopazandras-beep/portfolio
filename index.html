@@ -829,6 +829,16 @@
         if (e.key === "Escape") window.closeCertificates();
       });
     })();
+
+    function copyEmail() {
+      var btn = document.getElementById('email-btn');
+      var toast = document.getElementById('email-toast');
+      navigator.clipboard.writeText('flp.andras98@gmail.com').then(function() {
+        btn.textContent = '✓ Copied!';
+        toast.classList.add('show');
+        setTimeout(function() { btn.textContent = '✉ Email me'; toast.classList.remove('show'); }, 2500);
+      }).catch(function() { window.location.href = 'mailto:flp.andras98@gmail.com'; });
+    }
   </script>
 
 <!-- CV MODAL -->
