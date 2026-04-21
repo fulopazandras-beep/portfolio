@@ -298,6 +298,19 @@
     }
     .hero-grid, .skills-row { position: relative; z-index: 1; }
 
+  
+    /* ── EMAIL TOAST ───────────────────────────────────── */
+    #email-toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(16px);
+      background: var(--surface2); border: 0.5px solid rgba(255,255,255,0.12);
+      color: var(--text); font-size: 13px; font-weight: 500;
+      padding: 12px 22px; border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none; z-index: 9999; white-space: nowrap;
+    }
+    #email-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
   </style>
 </head>
 <body>
@@ -469,7 +482,7 @@
       <h2 class="reveal">Let's build something <span>great.</span></h2>
       <p class="reveal">Currently available for junior full-time roles and select freelance projects. If you're hiring, I'd be glad to share more about my process and work.</p>
       <div class="contact-links reveal">
-        <a href="mailto:flp.andras98@gmail.com" class="contact-btn primary">✉ Email me</a>
+        <button onclick="copyEmail()" class="contact-btn primary" id="email-btn">✉ Email me</button>
         <a href="https://www.linkedin.com/in/fulop-andras-416ab0297/" target="_blank" rel="noopener noreferrer" class="contact-btn linkedin" style="background:#0A66C2;border-color:#0A66C2;color:#ffffff;font-weight:500;">LinkedIn Profile</a>
       </div>
     </section>
