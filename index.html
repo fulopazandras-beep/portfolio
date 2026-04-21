@@ -632,12 +632,12 @@
               : "German CV — Fülöp András";
           }
 
-          frame.src = src;
+          frame.src = src.includes("#") ? src : src + "#view=FitH";
           modal.style.display = "flex";
           document.body.style.overflow = "hidden";
 
           if (downloadBtn) {
-            downloadBtn.onclick = () => window.open(src, "_blank");
+            downloadBtn.onclick = () => window.open(src.split("#")[0], "_blank");
           }
         };
 
@@ -744,7 +744,7 @@
   display: none; align-items: center; justify-content: center;
   backdrop-filter: blur(8px);
 ">
-  <div style="position: relative; width: 90%; max-width: 860px; height: 90vh; display: flex; flex-direction: column;">
+  <div style="position: relative; width: 96%; max-width: 1100px; height: 96vh; display: flex; flex-direction: column;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
       <span id="cv-title" style="color: #a78bfa; font-size: 14px; font-weight: 500; font-family: Inter, sans-serif;"></span>
       <div style="display: flex; gap: 10px;">
