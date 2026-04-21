@@ -695,14 +695,14 @@
         modal.id = "cert-modal-runtime";
         modal.style.cssText = "display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;padding:24px;";
         modal.innerHTML =
-          '<div style="background:#161618;border:0.5px solid rgba(255,255,255,0.08);border-radius:18px;width:100%;max-width:940px;height:min(88vh,760px);padding:20px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:12px;">' +
+          '<div style="background:#161618;border:0.5px solid rgba(255,255,255,0.08);border-radius:18px;width:100%;max-width:1100px;height:96vh;padding:20px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:12px;">' +
             '<button id="cert-close-runtime" type="button" style="position:absolute;top:18px;right:18px;background:#1e1e21;border:0.5px solid rgba(255,255,255,0.08);color:#888890;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;">X</button>' +
             '<p style="font-size:10px;color:#60e0c0;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;margin-top:2px;">Credentials</p>' +
             '<h2 style="font-size:22px;font-weight:700;letter-spacing:-0.02em;">' + CERT_TITLE + '</h2>' +
             '<div style="display:flex;justify-content:flex-end;">' +
               '<a id="cert-open-tab-runtime" href="' + certSrc + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#60e0c0;border:0.5px solid rgba(96,224,192,0.3);padding:6px 12px;border-radius:20px;white-space:nowrap;">Open in new tab</a>' +
             '</div>' +
-            '<iframe id="cert-frame-runtime" src="' + certSrc + '" style="width:100%;flex:1;border:none;border-radius:10px;background:#0f0f12;"></iframe>' +
+            '<iframe id="cert-frame-runtime" src="' + certSrc + '#view=FitH" style="width:100%;flex:1;border:none;border-radius:10px;background:#0f0f12;"></iframe>' +
           '</div>';
 
         modal.addEventListener("click", (e) => {
