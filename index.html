@@ -15,7 +15,7 @@
     }
     html { scroll-behavior: smooth; }
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; min-height: 100vh; overflow-x: hidden; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body { background: linear-gradient(160deg, #0f0c18 0%, #0e0e0f 48%, #090e12 100%); background-attachment: fixed; color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; min-height: 100vh; overflow-x: hidden; font-size: 16px; -webkit-font-smoothing: antialiased; }
     a { text-decoration: none; color: inherit; }
     .container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
     a:focus-visible, button:focus-visible {
@@ -261,6 +261,43 @@
     .mock-imgs { display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; margin-top:3px; }
     .mock-img-block { height:30px; border-radius:5px; background:linear-gradient(135deg,rgba(167,139,250,0.12),rgba(96,224,192,0.08)); border:0.5px solid rgba(255,255,255,0.06); }
 
+  
+    /* ── PAGE SIDE LABELS ─────────────────────────────── */
+    .side-label {
+      position: fixed; top: 50%; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.13); white-space: nowrap;
+      z-index: 5; display: none; user-select: none;
+    }
+    .side-label-l { left: 28px; transform: translateY(-50%) rotate(-90deg); }
+    .side-label-r { right: 28px; transform: translateY(-50%) rotate(90deg); }
+    .side-line {
+      position: fixed; width: 1px; height: 72px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.11), transparent);
+      display: none; z-index: 5;
+    }
+    .side-line-l { left: 32px; top: calc(50% + 56px); }
+    .side-line-r { right: 32px; top: calc(50% + 56px); }
+    @media (min-width: 1260px) { .side-label { display: block; } .side-line { display: block; } }
+
+    /* ── HERO AMBIENT ORBS ───────────────────────────── */
+    #home { position: relative; overflow: visible; }
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+    }
+    .hero-orb-a {
+      width: 720px; height: 720px; top: -200px; right: -160px;
+      background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 65%);
+      filter: blur(2px);
+    }
+    .hero-orb-b {
+      width: 480px; height: 480px; bottom: -100px; left: -100px;
+      background: radial-gradient(circle, rgba(96,224,192,0.07) 0%, transparent 65%);
+      filter: blur(2px);
+    }
+    .hero-grid, .skills-row { position: relative; z-index: 1; }
+
   </style>
 </head>
 <body>
@@ -291,8 +328,14 @@
     </div>
   </nav>
 
+    <div class="side-label side-label-l">Fülöp András &nbsp;·&nbsp; Product Designer</div>
+  <div class="side-label side-label-r">Portfolio &nbsp;·&nbsp; 2025</div>
+  <div class="side-line side-line-l"></div>
+  <div class="side-line side-line-r"></div>
   <div class="container">
     <section id="home">
+      <div class="hero-orb hero-orb-a"></div>
+      <div class="hero-orb hero-orb-b"></div>
       <div class="hero-grid">
         <div class="hero-text">
           <div class="hero-tag"><span class="dot"></span> Available for junior product design roles</div>
