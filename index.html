@@ -639,7 +639,7 @@
     }
 
     // ── STAT COUNTERS ─────────────────────────────────────────────
-    const targets = [1, null, 1];
+    const targets = [2, null, 1];
     document.querySelectorAll('.stat-num').forEach((el, i) => {
       if (targets[i] === null) return; // skip Junior box
       new IntersectionObserver(([e]) => {
