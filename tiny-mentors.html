@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiny Mentors — Fülöp András</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0e0f; --surface: #161618; --surface2: #1e1e21;
+      --border: rgba(255,255,255,0.08); --accent: #a78bfa;
+      --accent2: #60e0c0; --text: #f0f0f2; --muted: #888890;
+      --tm-cream: #fff6e5; --tm-grape: #9b6be3; --tm-berry: #ff6b9d;
+      --tm-orange: #ff8c42; --tm-sun: #ffc93c; --tm-teal: #3ecfbf;
+    }
+    html { scroll-behavior: smooth; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; min-height: 100vh; overflow-x: hidden; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+
+    #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    nav, .hero-wrap, .content-wrap, #progress-bar, #cursor-glow { position: relative; z-index: 1; }
+
+    #progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--tm-grape), var(--tm-berry)); width: 0%; z-index: 200; transition: width 0.1s linear; }
+    #cursor-glow { pointer-events: none; position: fixed; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%); transform: translate(-50%,-50%); transition: left 0.08s ease, top 0.08s ease; z-index: 0; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(14,14,15,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 0.5px solid var(--border); padding: 20px 0; animation: fadeIn 0.4s ease both; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 15px; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; transition: opacity 0.2s; }
+    .logo:hover { opacity: 0.75; }
+    .back-nav { font-size: 13px; color: var(--muted); transition: color 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .back-nav:hover { color: var(--accent); }
+
+    .hero-wrap { padding: 80px 0 60px; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tm-berry); background: rgba(255,107,157,0.07); border: 0.5px solid rgba(255,107,157,0.25); border-radius: 20px; padding: 6px 16px; margin-bottom: 28px; }
+    .dot-pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--tm-berry); display: inline-block; animation: pulse-dot 2s ease infinite; }
+    h1.page-title { font-size: clamp(40px, 7vw, 68px); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 20px; }
+    h1.page-title span { background: linear-gradient(90deg, var(--tm-grape), var(--tm-berry)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.75; font-weight: 300; margin-bottom: 40px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+    .btn-primary { font-size: 14px; font-weight: 600; background: var(--tm-grape); color: #fff; padding: 13px 28px; border-radius: 8px; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-block; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(155,107,227,0.35); }
+    .btn-ghost { font-size: 14px; font-weight: 400; background: transparent; color: var(--muted); padding: 13px 28px; border-radius: 8px; border: 0.5px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--text); transform: translateY(-2px); }
+
+    .meta-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { font-size: 11px; font-weight: 500; letter-spacing: 0.03em; color: var(--muted); background: var(--surface2); border: 0.5px solid var(--border); padding: 5px 12px; border-radius: 20px; }
+
+    .content-wrap { padding-bottom: 100px; }
+    .section { padding: 56px 0; border-top: 0.5px solid var(--border); }
+    .section-label { font-size: 10px; color: var(--tm-grape); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+    h2.section-heading { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 18px; }
+    .body-text { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 720px; margin-bottom: 20px; }
+    .body-text strong { color: var(--text); font-weight: 500; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    @media (max-width: 620px) { .two-col { grid-template-columns: 1fr; } }
+    .card { background: var(--surface2); border: 0.5px solid var(--border); border-radius: 14px; padding: 22px 24px; transition: border-color 0.25s, transform 0.25s; }
+    .card:hover { border-color: rgba(155,107,227,0.35); transform: translateY(-2px); }
+    .card-icon { font-size: 22px; margin-bottom: 10px; }
+    .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .card p { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+    .screens-row { display: flex; gap: 20px; justify-content: center; align-items: flex-end; margin: 36px 0; padding: 32px 24px; background: linear-gradient(135deg, #150a22, #2a1535); border-radius: 18px; overflow: hidden; }
+    .screen-phone { width: 82px; height: 168px; background: linear-gradient(165deg,#1d1d22,#101014); border: 1px solid rgba(255,255,255,0.13); border-radius: 18px; position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.75); overflow: hidden; flex-shrink: 0; }
+    .screen-phone .island { position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 22px; height: 4px; background: #000; border-radius: 8px; z-index: 5; }
+    .screen-phone .home-bar { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 22px; height: 2.5px; background: rgba(255,255,255,0.18); border-radius: 2px; z-index: 5; }
+    .screen-phone .screen { position: absolute; inset: 3px; border-radius: 15px; overflow: hidden; }
+    .sp-l { transform: rotate(-8deg) translate(-8px, 18px); opacity: 0.6; }
+    .sp-r { transform: rotate(8deg) translate(8px, 18px); opacity: 0.6; }
+
+    .tech-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+    .tech-tag { font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: var(--muted); background: var(--surface2); border: 0.5px solid var(--border); padding: 6px 14px; border-radius: 6px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.94) translateY(12px); transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1) translateY(0); }
+
+    footer { border-top: 0.5px solid var(--border); padding: 28px 0; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(255,107,157,0.5); } 50% { box-shadow: 0 0 0 5px rgba(255,107,157,0); } }
+
+    .pill { animation: fadeIn 0.5s ease both 0.1s; opacity: 0; }
+    h1.page-title { animation: fadeUp 0.7s ease both 0.2s; opacity: 0; }
+    .hero-sub { animation: fadeUp 0.7s ease both 0.35s; opacity: 0; }
+    .cta-row { animation: fadeUp 0.7s ease both 0.45s; opacity: 0; }
+    .meta-chips { animation: fadeUp 0.6s ease both 0.55s; opacity: 0; }
+
+    @media (max-width: 900px) { .container { padding: 0 20px; } .hero-wrap { padding: 60px 0 40px; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      #cursor-glow, #bg-canvas { display: none; }
+      .reveal, .reveal-scale { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div id="progress-bar"></div>
+  <div id="cursor-glow"></div>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">FA</a>
+      <a href="index.html" class="back-nav">← Back to portfolio</a>
+    </div>
+  </nav>
+
+  <div class="hero-wrap">
+    <div class="container">
+      <div class="pill"><span class="dot-pulse"></span> Kids Learning App · Android · 2026</div>
+      <h1 class="page-title"><span>Tiny Mentors</span></h1>
+      <p class="hero-sub">A warm, game-based learning app for kids aged 3–6. Six mini-games built around animals, letters, numbers, and shapes — designed to feel like play, not school.</p>
+      <div class="cta-row">
+        <a href="https://fulopazandras-beep.github.io/tinymentor/app/" target="_blank" class="btn-primary">Try the app ↗</a>
+        <a href="https://www.figma.com/design/gH4xxYD987X52N3ZzVFtnQ/Tiny-Mentor-app?node-id=4-113&t=ldLXag5KZZsLL3OX-1" target="_blank" class="btn-ghost">View in Figma ↗</a>
+      </div>
+      <div class="meta-chips">
+        <span class="chip">Product Design</span>
+        <span class="chip">UX Research</span>
+        <span class="chip">Prototyping</span>
+        <span class="chip">HTML · CSS · JS</span>
+        <span class="chip">Capacitor · Android</span>
+        <span class="chip">Shipped</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="container">
+
+      <!-- SCREENS VISUAL -->
+      <div class="screens-row reveal">
+        <!-- left phone: mascot selection -->
+        <div class="screen-phone sp-l">
+          <div class="island"></div>
+          <div class="screen" style="background:url('data:image/jpeg;base64,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') center/cover no-repeat;"></div>
+          <div class="home-bar"></div>
+        </div>
+        <!-- center phone: splash -->
+        <div class="screen-phone">
+          <div class="island"></div>
+          <div class="screen" style="background:url('data:image/jpeg;base64,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') center/cover no-repeat;"></div>
+          <div class="home-bar"></div>
+        </div>
+        <!-- right phone: animals Q1 -->
+        <div class="screen-phone sp-r">
+          <div class="island"></div>
+          <div class="screen" style="background:url('data:image/jpeg;base64,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') center/cover no-repeat;"></div>
+          <div class="home-bar"></div>
+        </div>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="section">
+        <div class="section-label reveal">Overview</div>
+        <h2 class="section-heading reveal">What is Tiny Mentors?</h2>
+        <p class="body-text reveal">Tiny Mentors is a <strong>kids learning app</strong> I designed and built from scratch — from the first Figma wireframe to a signed Android app on Google Play. It targets children aged 3–6, with six mini-games covering animals, letters, numbers, shapes, and memory. Sessions are short by design: each game is exactly 5 questions, then done.</p>
+        <p class="body-text reveal">The goal was to build something a parent would feel comfortable handing to a toddler: <strong>no ads, no in-app purchases, no endless scroll</strong>. Just focused, rewarding play in bite-sized chunks.</p>
+      </div>
+
+      <!-- PROBLEM -->
+      <div class="section">
+        <div class="section-label reveal">The Problem</div>
+        <h2 class="section-heading reveal">Why another learning app?</h2>
+        <p class="body-text reveal">Most kids apps fall into one of two traps: they are either overloaded with ads and dark-pattern loops designed to maximise screen time, or they feel like digital homework — sterile, joyless, and quickly abandoned. Parents I spoke to wanted something in between: <strong>genuinely educational, but actually fun</strong>.</p>
+        <p class="body-text reveal">The insight that shaped everything: young children learn best through <strong>repetition with variety and immediate reward</strong>. Five questions, a celebration at the end, then a natural stopping point. No lives, no timers, no pressure.</p>
+      </div>
+
+      <!-- DESIGN DECISIONS -->
+      <div class="section">
+        <div class="section-label reveal">Design Decisions</div>
+        <h2 class="section-heading reveal">What drove the key choices</h2>
+        <div class="two-col">
+          <div class="card reveal-scale">
+            <div class="card-icon">🦔</div>
+            <h3>Mascot system</h3>
+            <p>Four animal mascots — Pip, Luna, Ziggy, and Sunny — each with a distinct personality. The child picks one at the start. It travels with them across every game, building familiarity and attachment rather than a blank generic interface.</p>
+          </div>
+          <div class="card reveal-scale">
+            <div class="card-icon">🎨</div>
+            <h3>Warm palette</h3>
+            <p>Cream base (#fff6e5) with grape purple, berry pink, tangerine, and sun yellow accents. Deliberately softer than the typical saturated "kids app" look — warm enough to feel friendly, not so bright it causes eye strain.</p>
+          </div>
+          <div class="card reveal-scale">
+            <div class="card-icon">🗺️</div>
+            <h3>Map hub</h3>
+            <p>Games are accessed from a visual adventure map, not a list. Navigation feels like choosing where to go next rather than selecting a menu item — a small change that makes the whole experience feel more alive.</p>
+          </div>
+          <div class="card reveal-scale">
+            <div class="card-icon">⭐</div>
+            <h3>Structured progression</h3>
+            <p>Every game is exactly 5 questions with progress dots at the top. A star-based result screen at the end provides closure and celebration. No infinite loops, no lives lost — just a clear start and a satisfying finish.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE GAMES -->
+      <div class="section">
+        <div class="section-label reveal">The Games</div>
+        <h2 class="section-heading reveal">Six mini-games</h2>
+        <p class="body-text reveal">Each game targets a different learning area. The question format varies per game — multiple choice, tap-to-select, matching — so the interaction never gets repetitive even across sessions.</p>
+        <div class="two-col">
+          <div class="card reveal-scale"><h3>🐾 Animals</h3><p>Identify animals from illustrations and audio prompts. The first game designed — sets the template for all the others.</p></div>
+          <div class="card reveal-scale"><h3>🔤 Letters</h3><p>Recognise uppercase and lowercase letters. Audio plays the letter sound; the child taps the matching card.</p></div>
+          <div class="card reveal-scale"><h3>🔢 Numbers</h3><p>Count objects and identify numbers 1–10. Visual grouping reinforces the concept before the label.</p></div>
+          <div class="card reveal-scale"><h3>🔷 Shapes</h3><p>Match shapes by name and visual form. Includes circle, square, triangle, rectangle, star, and more.</p></div>
+          <div class="card reveal-scale"><h3>🧠 Memory</h3><p>A classic card-flip matching game. Trains short-term memory and visual recognition in a familiar format.</p></div>
+          <div class="card reveal-scale"><h3>🌱 Growing Garden</h3><p>A nurturing game where the child plants and grows flowers. Introduces patience and sequential steps through play.</p></div>
+        </div>
+      </div>
+
+      <!-- HOW IT WAS BUILT -->
+      <div class="section">
+        <div class="section-label reveal">Technical</div>
+        <h2 class="section-heading reveal">How it was built and shipped</h2>
+        <p class="body-text reveal">The entire app is <strong>plain HTML, CSS, and JavaScript</strong> — no framework, no build system. This kept the bundle small, fast, and easy to iterate on. Game logic, animations, mascot theming, and audio are all vanilla JS.</p>
+        <p class="body-text reveal">To ship as a native Android app, I used <strong>Capacitor 8</strong> to wrap the web app in a WebView and generate a signed Android App Bundle (AAB). The final build came in under 25 MB and was submitted to <strong>Google Play</strong>.</p>
+        <p class="body-text reveal">Development was done with <strong>Claude Code</strong> as an AI coding partner — handling everything from game logic and layout implementation to Android packaging and icon generation. It made solo development at this scope genuinely feasible.</p>
+        <div class="tech-row reveal">
+          <span class="tech-tag">HTML / CSS / JS</span>
+          <span class="tech-tag">Capacitor 8</span>
+          <span class="tech-tag">Android Studio</span>
+          <span class="tech-tag">Signed AAB</span>
+          <span class="tech-tag">Google Play</span>
+          <span class="tech-tag">Figma</span>
+          <span class="tech-tag">Claude Code</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="section" style="text-align:center;border-top:0.5px solid var(--border);padding:64px 0;">
+        <div class="section-label reveal" style="justify-content:center;display:flex;">Try it yourself</div>
+        <h2 class="section-heading reveal" style="font-size:36px;">See it in action</h2>
+        <p class="body-text reveal" style="margin:0 auto 36px;text-align:center;">The app runs in the browser — no install needed. Or find it on Google Play once the listing goes live.</p>
+        <div class="cta-row reveal" style="justify-content:center;">
+          <a href="https://fulopazandras-beep.github.io/tinymentor/app/" target="_blank" class="btn-primary">Try the app ↗</a>
+          <a href="https://www.figma.com/design/gH4xxYD987X52N3ZzVFtnQ/Tiny-Mentor-app?node-id=4-113&t=ldLXag5KZZsLL3OX-1" target="_blank" class="btn-ghost">View in Figma ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;width:100%;">
+      <span>Fülöp András · Product Designer</span>
+      <a href="index.html" style="color:var(--accent);">← Back to portfolio</a>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const LINES = [];
+    function spawnLine() {
+      const fromLeft = Math.random() > 0.5;
+      return { x: fromLeft ? -200 : canvas.width + 200, y: Math.random() * canvas.height, vx: fromLeft ? (1.2 + Math.random() * 0.8) : -(1.2 + Math.random() * 0.8), vy: (Math.random() - 0.5) * 0.4, length: 180 + Math.random() * 180, alpha: 0, phase: 'in', holdFor: 80 + Math.random() * 120, held: 0, color: 'rgba(160,130,240,' };
+    }
+    for (let i = 0; i < 6; i++) { const l = spawnLine(); l.x += (Math.random() - 0.5) * canvas.width * 1.5; l.alpha = Math.random() * 0.07; LINES.push(l); }
+    function drawLine(l) {
+      const grad = ctx.createLinearGradient(l.x - l.length/2, l.y, l.x + l.length/2, l.y);
+      grad.addColorStop(0, l.color+'0)'); grad.addColorStop(0.3, l.color+l.alpha+')'); grad.addColorStop(0.7, l.color+l.alpha+')'); grad.addColorStop(1, l.color+'0)');
+      ctx.save(); ctx.translate(l.x, l.y); ctx.rotate(Math.atan2(l.vy, l.vx)); ctx.strokeStyle = grad; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(-l.length/2, 0); ctx.lineTo(l.length/2, 0); ctx.stroke(); ctx.restore();
+    }
+    function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < LINES.length; i++) {
+        const l = LINES[i]; l.x += l.vx; l.y += l.vy;
+        if (l.phase === 'in') { l.alpha = Math.min(l.alpha + 0.0015, 0.09); if (l.alpha >= 0.09) l.phase = 'hold'; }
+        else if (l.phase === 'hold') { l.held++; if (l.held >= l.holdFor) l.phase = 'out'; }
+        else { l.alpha = Math.max(l.alpha - 0.001, 0); if (l.alpha <= 0) LINES[i] = spawnLine(); }
+        drawLine(l);
+      }
+      requestAnimationFrame(tick);
+    }
+    if (!prefersReducedMotion) tick();
+
+    const glow = document.getElementById('cursor-glow');
+    if (!prefersReducedMotion && isFinePointer) {
+      document.addEventListener('mousemove', e => { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }, { passive: true });
+    } else { glow.style.display = 'none'; }
+
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal,.reveal-scale').forEach(el => el.classList.add('visible'));
+    } else {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const sibs = [...el.parentElement.querySelectorAll('.reveal,.reveal-scale')];
+          el.style.transitionDelay = (sibs.indexOf(el) * 0.08) + 's';
+          el.classList.add('visible');
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal,.reveal-scale').forEach(el => obs.observe(el));
+    }
+  </script>
+</body>
+</html>
